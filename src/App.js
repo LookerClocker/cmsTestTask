@@ -16,6 +16,13 @@ class App extends Component {
 
     componentDidMount(){
 
+        this.setState({
+            tabs: this.state.tabs.sort((prev, next) => {
+                    if (prev.order > next.order) {return 1;}
+                    if (prev.order < next.order) {return -1;}
+            })
+    });
+
         for(let i=0; i< this.state.tabs.length; i++){
             if (this.props.location.pathname === '/' + this.state.tabs[i].id) {
                 this.sendData(this.state.tabs[i]);
@@ -24,6 +31,7 @@ class App extends Component {
         }
 
         this.sendData(this.state.tabs[0]);
+        this.props.router.push(this.state.tabs[0].id);
     }
 
 
@@ -41,6 +49,7 @@ class App extends Component {
     }
 
     render() {
+
         return (
             <div className="App">
                 <header className="App-header">
@@ -51,12 +60,11 @@ class App extends Component {
                     <table>
                         <thead>
                         <tr>
-                            {tabs.sort((prev, next) => {
-                                if (prev.order > next.order) {return 1;}
-                                if (prev.order < next.order) {return -1;}
-                            }).map((tab) => <Link to={tab.id} onClick={() => this.sendData(tab)}>
-                                <td key={tab.id}>{tab.title}</td>
-                            </Link>)}
+                            {this.state.tabs.map((tab) =>
+                                <td key={tab.id}>
+                                    <Link to={tab.id} onClick={() => this.sendData(tab)}>{tab.title} </Link>
+                                </td>
+                           )}
                         </tr>
                         </thead>
                         <tbody>
