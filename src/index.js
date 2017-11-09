@@ -14,15 +14,17 @@ import Route from 'react-router/lib/Route';
 let hasRedirected = false;
 
 function checkDefaultTab(){
-    if (!hasRedirected) {
-        hasRedirected = true;
-        browserHistory.push('/dummyList');
+    if (!hasRedirected && this.props) {
+        if (this.props.location.pathname === '/') {
+            hasRedirected = true;
+            browserHistory.push('/dummyList');
+        }
     }
 }
 
 ReactDOM.render(
     <Router history={ browserHistory }>
-        <Route path='/' component={ App }>
+        <Route path='/' component={ App } onEnter={checkDefaultTab}>
             <IndexRoute component={ DummyList}/>
             <Route path='dummyTable' component={ DummyTable}/>
             <Route path='dummyChart' component={ DummyChart }/>

@@ -17,7 +17,7 @@ class App extends Component {
     componentDidMount(){
 
         for(let i=0; i< this.state.tabs.length; i++){
-            if (this.props.location.pathname === '/'+this.state.tabs[i].id) {
+            if (this.props.location.pathname === '/' + this.state.tabs[i].id) {
                 this.sendData(this.state.tabs[i]);
                return;
             }
@@ -41,7 +41,6 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.props);
         return (
             <div className="App">
                 <header className="App-header">
