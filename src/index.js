@@ -11,9 +11,18 @@ import Router from 'react-router/lib/Router';
 import { browserHistory, IndexRoute} from 'react-router';
 import Route from 'react-router/lib/Route';
 
+let hasRedirected = false;
+
+function checkDefaultTab(){
+    if (!hasRedirected) {
+        hasRedirected = true;
+        browserHistory.push('/dummyList');
+    }
+}
+
 ReactDOM.render(
     <Router history={ browserHistory }>
-        <Route path='/' component={ App }>
+        <Route path='/' component={ App } onEnter={checkDefaultTab}>
             <IndexRoute component={ DummyList}/>
             <Route path='dummyTable' component={ DummyTable}/>
             <Route path='dummyChart' component={ DummyChart }/>
