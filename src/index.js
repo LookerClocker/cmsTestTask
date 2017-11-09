@@ -22,7 +22,7 @@ function checkDefaultTab(){
 
 ReactDOM.render(
     <Router history={ browserHistory }>
-        <Route path='/' component={ App } onEnter={checkDefaultTab}>
+        <Route path='/' component={ App }>
             <IndexRoute component={ DummyList}/>
             <Route path='dummyTable' component={ DummyTable}/>
             <Route path='dummyChart' component={ DummyChart }/>

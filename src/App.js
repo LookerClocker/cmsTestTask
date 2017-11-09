@@ -7,7 +7,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tabs: [],
+            tabs: tabs,
             childrenWithProps: ''
         };
 
@@ -15,8 +15,17 @@ class App extends Component {
     }
 
     componentDidMount(){
-        this.sendData(tabs[0])
+
+        for(let i=0; i< this.state.tabs.length; i++){
+            if (this.props.location.pathname === '/'+this.state.tabs[i].id) {
+                this.sendData(this.state.tabs[i]);
+               return;
+            }
+        }
+
+        this.sendData(this.state.tabs[0]);
     }
+
 
     /**
      * passing necessary props to specific child element
@@ -32,6 +41,7 @@ class App extends Component {
     }
 
     render() {
+        console.log(this.props);
         return (
             <div className="App">
                 <header className="App-header">
